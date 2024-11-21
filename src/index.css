@@ -1,0 +1,90 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+@property --blockquoteScale {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0.75;
+}
+@property --blockquoteOpacity {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 0%;
+}
+@property --blockquoteGradient {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 0%;
+}
+
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+html {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-family: system-ui;
+}
+
+.has-pullquote {
+  animation: reveal linear both;
+  animation-timeline: view();
+  animation-range: cover 0% cover 100%;
+}
+
+blockquote {
+  font-size: 1.8rem;
+  line-height: 1.2;
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
+  scale: var(--blockquoteScale);
+
+  opacity: var(--blockquoteOpacity);
+  @supports not (animation-timeline: view()) {
+    opacity: 1;
+  }
+
+  background: linear-gradient(to right, red var(--blockquoteGradient), black var(--blockquoteGradient));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+
+}
+
+@keyframes reveal {
+  from {
+    --blockquoteScale: 0.75;
+  }
+  20% {
+    --blockquoteGradient: 0%;
+    --blockquoteOpacity: 0%;
+  }
+  40% {
+    --blockquoteOpacity: 100%;
+  }
+  80% {
+    --blockquoteGradient: 100%;
+  }
+  to {
+    --blockquoteScale: 1;
+  }
+}
